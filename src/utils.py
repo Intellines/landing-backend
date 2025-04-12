@@ -49,5 +49,4 @@ class Utils:
         except Exception as e:
             logger.error(f"Unexpected error retrieving location for IP {ip}: {e}")
 
-        finally:
-            return location
+        return location

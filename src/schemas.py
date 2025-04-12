@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
 
-class Main(BaseModel):
+class MainResponse(BaseModel):
     success: bool
     service: str
-    request_metadata: dict
+    ip: str
 
 
 class LocationIP(BaseModel):

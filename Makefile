@@ -1,12 +1,12 @@
-.PHONY: format lint fmt start
+.PHONY: sort lint fmt start
 
-format:
+sort:
 	uv run isort src/
 
 lint:
 	uv run ruff format src/
 
-fmt: format lint
+fmt: sort lint
 
 start: fmt
 	uv run src/main.py

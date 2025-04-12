@@ -1,25 +1,24 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, constr
 
 from contact_us.enums import FormOrigin
 
 
 class ContactUsRequest(BaseModel):
-    email: str
-    name: str
-    message: str
+    email: EmailStr
+    name: constr(min_length=1)
+    message: str | None
     origin: FormOrigin
     additional_data: dict
-    ip: str
+    ip: str | None
 
 
 class ContactUsResponse(BaseModel):
-    email: str
-    name: str
-    message: str
+    email: EmailStr
+    name: constr(min_length=1)
+    message: str | None
     origin: FormOrigin
     additional_data: dict
-    ip: str
+    ip: str | None
 
-    # retrieve ip on backend
-    city: str | None
-    country: str | None
+    city: str | None = None
+    country: str | None = None
