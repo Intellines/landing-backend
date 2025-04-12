@@ -31,7 +31,7 @@ class ContactUsUtils:
                 timeout=10,
             )
             logger.info(
-                f"status code - {response.status_code}; response text - {response.text}"
+                f"Retool response: status code - {response.status_code}; response text - {response.text}"
             )
             response.raise_for_status()
         except HTTPStatusError as e:
