@@ -18,4 +18,4 @@ class ContactUsResponse(BaseModel):
     additional_data: dict
 
     # retrieve ip on backend
-    ip: str
+    ip: str | None

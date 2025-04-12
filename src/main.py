@@ -8,15 +8,18 @@ from fastapi import FastAPI, Request
 from logging_config import logger
 from schemas import Main
 
+from contact_us.routers import router as contact_us_router
+
 load_dotenv(override=True)
 
-HOST: str | None  = os.getenv("HOST")
+HOST: str | None = os.getenv("HOST")
 PORT: str | None = os.getenv("PORT")
 
 if not HOST or not PORT:
     raise ValueError("server Host or Port are not configured")
 
 app: FastAPI = FastAPI(title="Intellines Landing Backend")
+app.include_router(contact_us_router)
 
 # bing app to Logfire
 logfire.instrument_fastapi(app, capture_headers=True)
