@@ -10,13 +10,13 @@ from schemas import Main
 
 load_dotenv(override=True)
 
-HOST = os.getenv("HOST", None)
-PORT = os.getenv("PORT", 0)
+HOST: str | None  = os.getenv("HOST")
+PORT: str | None = os.getenv("PORT")
 
 if not HOST or not PORT:
     raise ValueError("server Host or Port are not configured")
 
-app = FastAPI(title="Intellines Landing Backend")
+app: FastAPI = FastAPI(title="Intellines Landing Backend")
 
 # bing app to Logfire
 logfire.instrument_fastapi(app, capture_headers=True)

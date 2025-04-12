@@ -5,7 +5,7 @@ from logging import Logger
 import logfire
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 LOGFIRE_TOKEN: str = os.getenv("LOGFIRE_TOKEN", "")
 
 logger: Logger = logging.getLogger("backend")
