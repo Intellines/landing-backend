@@ -1,8 +1,8 @@
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
 from contact_us.utils import ContactUsUtils
 from logging_config import logger
-from src.schemas import LocationIP
-from src.utils import Utils
+from schemas import LocationIP
+from utils import Utils
 
 
 class ContactUsService:
