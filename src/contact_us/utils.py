@@ -18,7 +18,7 @@ if not RETOOL_WORKFLOW_URL or not RETOOL_WORKFLOW_API_KEY:
 
 class ContactUsUtils:
     @staticmethod
-    def send_contact_us_to_retool(payload: ContactUsResponse) -> bool | None:
+    def send_contact_us_to_retool(payload: ContactUsResponse) -> None:
         logger.info(
             f"sending Contact Us form enriched payload to Retool - {payload.model_dump_json()}"
         )
@@ -35,14 +35,12 @@ class ContactUsUtils:
             )
             response.raise_for_status()
         except HTTPStatusError as e:
-            logger.error(
+            logger.critical(
                 f"HTTP error occurred: {e.response.status_code} - {e.response.text}"
             )
         except RequestError as e:
-            logger.error(f"Request error occurred: {e}")
+            logger.critical(f"Request error occurred: {e}")
         except Exception as e:
-            logger.error(
+            logger.critical(
                 f"Unexpected error occurred while sending Contact Us for to Retool - {payload.model_dump_json()}; error - {e}"
             )
-        else:
-            return True

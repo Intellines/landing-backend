@@ -9,6 +9,7 @@ class ContactUsRequest(BaseModel):
     message: str
     origin: FormOrigin
     additional_data: dict
+    ip: str
 
 
 class ContactUsResponse(BaseModel):
@@ -17,8 +18,8 @@ class ContactUsResponse(BaseModel):
     message: str
     origin: FormOrigin
     additional_data: dict
+    ip: str
 
     # retrieve ip on backend
-    ip: str
     city: str | None
     country: str | None
