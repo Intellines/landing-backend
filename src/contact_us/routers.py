@@ -20,5 +20,12 @@ router: APIRouter = APIRouter(prefix="/contact_us", tags=["contact_us"])
 @router.port("/", response_model=ContactUsResponse)
 async def submit_contact_us(form_data: ContactUsRequest):
     logger.info(f"Contact Us form submitted - {form_data.model_dump_json()}")
-    ...
+    response: ContactUsResponse = ContactUsResponse()
+
+    for key, value in form_data.model_dump().items():
+        setattr(response, key, value)
+    
+    ip: str = "test"
+    response.ip = ip
+    return response
 
