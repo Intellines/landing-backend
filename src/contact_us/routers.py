@@ -1,12 +1,12 @@
 import os
+
 from dotenv import load_dotenv
-
-from utils import Utils
-from schemas import LocationIP
-
-from logging_config import logger
 from fastapi import APIRouter, Request
+
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
+from logging_config import logger
+from schemas import LocationIP
+from utils import Utils
 
 load_dotenv(override=True)
 
@@ -30,5 +30,6 @@ async def submit_contact_us(form_data: ContactUsRequest, request: Request):
     location: LocationIP = Utils.define_location_by_ip(ip)
     logger.info(f"Location by IP - {location}")
 
-
-    return ContactUsResponse(**form_data.model_dump(), ip=ip, city=location.city, country=location.country)
+    return ContactUsResponse(
+        **form_data.model_dump(), ip=ip, city=location.city, country=location.country
+    )

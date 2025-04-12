@@ -5,10 +5,9 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 
+from contact_us.routers import router as contact_us_router
 from logging_config import logger
 from schemas import Main
-
-from contact_us.routers import router as contact_us_router
 
 load_dotenv(override=True)
 

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+
 from contact_us.enums import FormOrigin
 
 
