@@ -1,9 +1,11 @@
 import os
 
+import logfire
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 
+from logging_config import logger
 from schemas import Main
 
 load_dotenv(override=True)
@@ -15,6 +17,9 @@ if not HOST or not PORT:
     raise ValueError("server Host or Port are not configured")
 
 app = FastAPI(title="Intellines Landing Backend")
+
+# bing app to Logfire
+logfire.instrument_fastapi(app, capture_headers=True)
 
 
 @app.get("/", response_model=Main)
@@ -37,4 +42,5 @@ async def main(request: Request):
 
 
 if __name__ == "__main__":
+    logger.info(f"starting server at {HOST}:{PORT}")
     uvicorn.run(app=app, host=HOST, port=int(PORT))
