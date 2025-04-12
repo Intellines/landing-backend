@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 from logging_config import logger
 from fastapi import APIRouter, Request
-from contact_us.schemas import ContactUsForm
+from contact_us.schemas import ContactUsRequest, ContactUsResponse
 
 load_dotenv(override=True)
 
@@ -17,7 +17,8 @@ if not RETOOL_WORKFLOW_URL or not RETOOL_WORKFLOW_API_KEY:
 router: APIRouter = APIRouter(prefix="/contact_us", tags=["contact_us"])
 
 
-@router.port("/", response_model=ContactUsForm)
-async def submit_contact_us(form_data: ContactUsForm):
+@router.port("/", response_model=ContactUsResponse)
+async def submit_contact_us(form_data: ContactUsRequest):
+    logger.info(f"Contact Us form submitted - {form_data.model_dump_json()}")
     ...
 

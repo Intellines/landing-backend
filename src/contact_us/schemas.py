@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from contact_us.enums import FormOrigin
 
 
-class ContactUsForm(BaseModel):
+class ContactUsRequest(BaseModel):
     email: str
     name: str
     message: str
