@@ -20,7 +20,7 @@ class ContactUsUtils:
     @staticmethod
     def send_contact_us_to_retool(payload: ContactUsResponse) -> bool | None:
         logger.info(
-            f"sending Contact Us dorm enriched payload to Retool - {payload.model_dump_json()}"
+            f"sending Contact Us form enriched payload to Retool - {payload.model_dump_json()}"
         )
 
         try:
