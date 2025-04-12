@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
 
+from utils import Utils
+from schemas import LocationIP
+
 from logging_config import logger
 from fastapi import APIRouter, Request
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
@@ -20,7 +23,12 @@ router: APIRouter = APIRouter(prefix="/contact_us", tags=["contact_us"])
 @router.post("/", response_model=ContactUsResponse)
 async def submit_contact_us(form_data: ContactUsRequest, request: Request):
     logger.info(f"Contact Us form submitted - {form_data.model_dump_json()}")
-    response: ContactUsResponse = ContactUsResponse(**form_data.model_dump())
-    ip: str = "test"
-    response.ip = ip
-    return response
+
+    ip: str = Utils.get_ip_from_request(request)
+    logger.info(f"IP - {ip}")
+
+    location: LocationIP = Utils.define_location_by_ip(ip)
+    logger.info(f"Location by IP - {location}")
+
+
+    return ContactUsResponse(**form_data.model_dump(), ip=ip, city=location.city, country=location.country)
