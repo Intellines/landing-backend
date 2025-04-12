@@ -4,6 +4,7 @@ import logfire
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from contact_us.routers import router as contact_us_router
 from logging_config import logger
@@ -18,6 +19,17 @@ if not HOST or not PORT:
     raise ValueError("server Host or Port are not configured")
 
 app: FastAPI = FastAPI(title="Intellines Landing Backend")
+
+# CORS setup
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
+# routers registering
 app.include_router(contact_us_router)
 
 # bing app to Logfire

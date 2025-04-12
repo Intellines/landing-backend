@@ -27,9 +27,7 @@ class Utils:
 
         location: LocationIP = LocationIP(ip=ip, city=None, country=None)
         try:
-            response: Response = httpx.get(
-                f"http://ip-api.com/json/{ip}", timeout=10
-            )
+            response: Response = httpx.get(f"http://ip-api.com/json/{ip}", timeout=10)
             logger.debug(
                 f"status code - {response.status_code}; response text - {response.text}"
             )
