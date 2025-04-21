@@ -3,7 +3,7 @@ from logging import Logger
 
 import logfire
 
-from config import config
+from .config import config
 
 logger: Logger = logging.getLogger("backend")
 logger.setLevel(logging.DEBUG)

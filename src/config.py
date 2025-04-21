@@ -12,6 +12,8 @@ class Config(BaseSettings):
     RETOOL_WORKFLOW_URL: str
     RETOOL_WORKFLOW_API_KEY: str
 
+    DATABASE_URL: str
+
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8"
     )
