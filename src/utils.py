@@ -36,7 +36,7 @@ class Utils:
             data = response.json()
             location.city = data.get("city")
             location.country = data.get("country")
-            logger.debug(
+            logger.info(
                 f"defined location: IP - {ip}; City - {location.city}; Country - {location.country}"
             )
 
