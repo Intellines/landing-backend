@@ -22,6 +22,6 @@ class ContactUsUtils:
             )
             response.raise_for_status()
         except HTTPStatusError as e:
-            logger.critical(
+            logger.error(
                 f"Error occurred while sending Contact Us form to Retool - {payload.model_dump_json()}; error - {e}"
             )
