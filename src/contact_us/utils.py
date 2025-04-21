@@ -9,7 +9,7 @@ from logging_config import logger
 class ContactUsUtils:
     @staticmethod
     def send_contact_us_to_retool(payload: ContactUsResponse) -> None:
-        logger.info(f"Sending - {payload.model_dump_json()}")
+        logger.debug(f"Sending - {payload.model_dump_json()}")
         try:
             response: Response = httpx.post(
                 url=config.RETOOL_WORKFLOW_URL,
