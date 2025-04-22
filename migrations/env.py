@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from sqlmodel import SQLModel
-from src.db import DATABASE_URL
+from src.database import DATABASE_URL
 from src.models import ContactUsFormLeads, User
 
 # this is the Alembic Config object, which provides
