@@ -8,7 +8,7 @@ from src.enums import Origin
 
 
 class ContactUsFormLeads(SQLModel, table=True):
-    __tablename__ = "contact_us_form_leads"
+    __tablename__ = 'contact_us_form_leads'
     id: int = Field(primary_key=True)
     name: str = Field(max_length=500, unique=True)
     email: str
@@ -24,7 +24,7 @@ class ContactUsFormLeads(SQLModel, table=True):
 
 
 class User(SQLModel, table=True):
-    __tablename__ = "users"
+    __tablename__ = 'users'
     id: int = Field(primary_key=True)
     username: str = Field(unique=True, max_length=255)
     email: str = Field(unique=True, max_length=320)
