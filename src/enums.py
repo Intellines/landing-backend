@@ -2,5 +2,5 @@ from enum import StrEnum
 
 
 class Origin(StrEnum):
-    LANDING: str = 'landging'
+    LANDING: str = 'landing'
     OTHER: str = 'other'
