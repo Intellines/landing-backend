@@ -15,7 +15,7 @@ class Config(BaseSettings):
     DATABASE_URL: str
 
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(
-        env_file='.env', env_file_encoding='utf-8'
+        env_file=".env", env_file_encoding="utf-8"
     )
 
 

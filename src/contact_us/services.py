@@ -8,7 +8,7 @@ from utils import Utils
 class ContactUsService:
     @staticmethod
     def send_contact_us_to_retool(form_data: ContactUsRequest) -> ContactUsResponse:
-        logger.info(f'Contact Us form submitted - {form_data.model_dump_json()}')
+        logger.info(f"Contact Us form submitted - {form_data.model_dump_json()}")
         contact_us_response: ContactUsResponse = ContactUsResponse(
             **form_data.model_dump()
         )

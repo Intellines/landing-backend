@@ -16,17 +16,17 @@ DATABASE_URL: str = config.DATABASE_URL
 
 
 if not DATABASE_URL:
-    logger.error('No DATABASE_URL found in .env file. Exiting...')
+    logger.error("No DATABASE_URL found in .env file. Exiting...")
     sys.exit(1)
 
 try:
-    logger.debug('Connecting to the database')
+    logger.debug("Connecting to the database")
     engine = create_engine(DATABASE_URL)
     with engine.connect() as connection:
         connection.close()
-    logger.debug('Successfully connected to the database')
+    logger.debug("Successfully connected to the database")
 except Exception as e:
-    logger.error(f'Failed to connect to the database: {e}')
+    logger.error(f"Failed to connect to the database: {e}")
     sys.exit(1)
 
 
