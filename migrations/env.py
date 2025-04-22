@@ -7,7 +7,7 @@ from alembic import context
 
 from sqlmodel import SQLModel
 from src.db import DATABASE_URL
-from src.models import ContactUsFormLeads
+from src.models import ContactUsFormLeads, User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
