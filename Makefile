@@ -8,5 +8,5 @@ lint:
 
 fmt: sort lint
 
-start: fmt
+start:
 	uv run src/main.py
