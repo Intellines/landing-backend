@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 
 from all_models import User
 from database import get_session
-from users.schemas import UserCreate
+from users.schemas import UpdateEmailRequest, UpdatePasswordRequest, UpdateUsernameRequest, UserCreate
 from users.services import UserService
 
 router: APIRouter = APIRouter(prefix='/users', tags=['users'])
@@ -27,3 +27,18 @@ async def get_user(user_id: int, session: Session = Depends(get_session)) -> Use
 @router.delete('/')
 async def delete_user(user_id: int, session: Session = Depends(get_session)) -> User:
     return await UserService.delete_user(user_id, session)
+
+
+@router.put('/updatePassword')
+async def update_user_password(user_id: int, payload: UpdatePasswordRequest, session: Session = Depends(get_session)) -> User:
+    raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail='Service is not yet implemented')
+
+
+@router.put('/updateUsername')
+async def update_username(user_id: int, payload: UpdateUsernameRequest, session: Session = Depends(get_session)) -> User:
+    raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail='Service is not yet implemented')
+
+
+@router.put('/updateEmail')
+async def update_user_email(user_id: int, payload: UpdateEmailRequest, session: Session = Depends(get_session)) -> User:
+    raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail='Service is not yet implemented')
