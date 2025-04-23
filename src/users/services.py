@@ -52,8 +52,5 @@ class UserService:
         user: User | None = session.get(User, user_id)
         if not user:
             logger.warning(f'User with ID - {user_id} not found')
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f'User with ID - {user_id} not found'
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with ID - {user_id} not found')
         return user
