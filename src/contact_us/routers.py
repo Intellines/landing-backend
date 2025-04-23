@@ -10,7 +10,7 @@ from logging_config import logger
 router: APIRouter = APIRouter(prefix='/contact_us', tags=['contact_us'])
 
 
-@router.get('/')
+@router.get('/all')
 async def get_all_contact_us_form_leads(
     session: Session = Depends(get_session),
 ) -> list[ContactUsFormLeads]:

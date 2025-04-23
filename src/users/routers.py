@@ -9,7 +9,7 @@ from users.services import UserService
 router: APIRouter = APIRouter(prefix='/users', tags=['users'])
 
 
-@router.get('/')
+@router.get('/all')
 async def get_all_users(session: Session = Depends(get_session)) -> list[User]:
     return await UserService.get_all_users(session)
 
@@ -17,3 +17,7 @@ async def get_all_users(session: Session = Depends(get_session)) -> list[User]:
 @router.post('/')
 async def create_user(user: UserCreate, session: Session = Depends(get_session)) -> User:
     return await UserService.create_user(user, session)
+
+@router.get('/')
+async def get_user(user_id: int, session: Session = Depends(get_session)) -> User:
+    return await UserService.get_user(user_id, session)

@@ -46,3 +46,14 @@ class UserService:
         session.commit()
         session.refresh(db_user)
         return db_user
+
+    async def get_user(user_id: int, session: Session = Depends(get_session)) -> User:
+        logger.info(f'Get User with ID - {user_id}')
+        user: User | None = session.get(User, user_id)
+        if not user:
+            logger.warning(f'User with ID - {user_id} not found')
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f'User with ID - {user_id} not found'
+            )
+        return user
