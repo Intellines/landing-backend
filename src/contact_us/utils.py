@@ -17,11 +17,7 @@ class ContactUsUtils:
                 json=payload.model_dump(),
                 timeout=10,
             )
-            logger.info(
-                f'Retool response: status code - {response.status_code}; response text - {response.text}'
-            )
+            logger.info(f'Retool response: status code - {response.status_code}; response text - {response.text}')
             response.raise_for_status()
         except HTTPStatusError as e:
-            logger.error(
-                f'Error occurred while sending Contact Us form to Retool - {payload.model_dump_json()}; error - {e}'
-            )
+            logger.error(f'Error occurred while sending Contact Us form to Retool - {payload.model_dump_json()}; error - {e}')

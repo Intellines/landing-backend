@@ -16,15 +16,11 @@ class UserService:
         return users
 
     @staticmethod
-    async def create_user(
-        user: UserCreate, session: Session = Depends(get_session)
-    ) -> User:
+    async def create_user(user: UserCreate, session: Session = Depends(get_session)) -> User:
         logger.info(f'Create Users - {user.model_dump_json()}')
 
         # validate username
-        user_with_same_username: User | None = session.exec(
-            select(User).where(User.username == user.username)
-        ).one_or_none()
+        user_with_same_username: User | None = session.exec(select(User).where(User.username == user.username)).one_or_none()
         if user_with_same_username:
             logger.warning(f'User with such username exists - {user.username}')
             raise HTTPException(
@@ -33,9 +29,7 @@ class UserService:
             )
 
         # validate email
-        user_with_same_email: User | None = session.exec(
-            select(User).where(User.email == user.email)
-        ).one_or_none()
+        user_with_same_email: User | None = session.exec(select(User).where(User.email == user.email)).one_or_none()
         if user_with_same_email:
             logger.warning(f'User with such email exists - {user.email}')
             raise HTTPException(
@@ -47,9 +41,7 @@ class UserService:
         password_hash: str = UserUtils.generate_password_hash(user.password)
 
         # insert user
-        db_user: User = User(
-            username=user.username, email=user.email, password_hash=password_hash
-        )
+        db_user: User = User(username=user.username, email=user.email, password_hash=password_hash)
         session.add(db_user)
         session.commit()
         session.refresh(db_user)

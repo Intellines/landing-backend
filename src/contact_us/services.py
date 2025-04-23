@@ -9,9 +9,7 @@ class ContactUsService:
     @staticmethod
     def send_contact_us_to_retool(form_data: ContactUsRequest) -> ContactUsResponse:
         logger.info(f'Contact Us form submitted - {form_data.model_dump_json()}')
-        contact_us_response: ContactUsResponse = ContactUsResponse(
-            **form_data.model_dump()
-        )
+        contact_us_response: ContactUsResponse = ContactUsResponse(**form_data.model_dump())
         if ip := form_data.ip:
             location: LocationIP = Utils.define_location_by_ip(ip)
             contact_us_response.city = location.city

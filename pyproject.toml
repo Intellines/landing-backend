@@ -20,3 +20,4 @@ dependencies = [
     "sqlmodel>=0.0.24",
     "uvicorn>=0.34.0",
 ]
+

@@ -15,7 +15,5 @@ async def get_all_users(session: Session = Depends(get_session)) -> list[User]:
 
 
 @router.post('/')
-async def create_user(
-    user: UserCreate, session: Session = Depends(get_session)
-) -> User:
+async def create_user(user: UserCreate, session: Session = Depends(get_session)) -> User:
     return await UserService.create_user(user, session)

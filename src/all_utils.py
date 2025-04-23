@@ -28,22 +28,16 @@ class Utils:
         location: LocationIP = LocationIP(ip=ip, city=None, country=None)
         try:
             response: Response = httpx.get(f'http://ip-api.com/json/{ip}', timeout=10)
-            logger.debug(
-                f'status code - {response.status_code}; response text - {response.text}'
-            )
+            logger.debug(f'status code - {response.status_code}; response text - {response.text}')
             response.raise_for_status()
 
             data = response.json()
             location.city = data.get('city')
             location.country = data.get('country')
-            logger.info(
-                f'defined location: IP - {ip}; City - {location.city}; Country - {location.country}'
-            )
+            logger.info(f'defined location: IP - {ip}; City - {location.city}; Country - {location.country}')
 
         except HTTPStatusError as e:
-            logger.error(
-                f'HTTP error occurred: {e.response.status_code} - {e.response.text}'
-            )
+            logger.error(f'HTTP error occurred: {e.response.status_code} - {e.response.text}')
         except RequestError as e:
             logger.error(f'Request error occurred: {e}')
         except Exception as e:
