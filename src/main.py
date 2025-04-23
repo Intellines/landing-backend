@@ -10,8 +10,8 @@ from config import config
 from contact_us.routers import router as contact_us_router
 from users.routers import router as user_router
 from logging_config import logger
-from src.all_schemas import MainResponse
-from src.all_utils import Utils
+from all_schemas import MainResponse
+from all_utils import Utils
 
 app: FastAPI = FastAPI(title='Intellines Landing Backend')
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')

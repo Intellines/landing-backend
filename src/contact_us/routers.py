@@ -1,11 +1,26 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
 from contact_us.services import ContactUsService
 
+from sqlmodel import Session, select
+from database import get_session
+from all_models import ContactUsFormLeads
+from logging_config import logger
+
 router: APIRouter = APIRouter(prefix='/contact_us', tags=['contact_us'])
 
 
-@router.post('/', response_model=ContactUsResponse)
-async def submit_contact_us(form_data: ContactUsRequest):
+@router.get('/')
+async def get_all_contact_us_form_leads(session: Session = Depends(get_session)) -> list[ContactUsFormLeads]:
+    leads: list[ContactUsFormLeads] = session.exec(
+        select(ContactUsFormLeads)
+    ).all()
+    logger.info(f'Found {len(leads)} Contact Us Leads')
+    return leads
+
+
+
+@router.post('/')
+async def submit_contact_us(form_data: ContactUsRequest) -> ContactUsResponse:
     return ContactUsService.send_contact_us_to_retool(form_data)

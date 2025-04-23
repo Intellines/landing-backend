@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, Field
 from sqlalchemy import Column
 from sqlalchemy.dialects.postgresql import JSONB
 
-from src.all_enums import Origin
+from all_enums import Origin
 
 
 class ContactUsFormLeads(SQLModel, table=True):
