@@ -3,6 +3,7 @@ from typing import Annotated
 import logfire
 import uvicorn
 from fastapi import Depends, FastAPI, Request
+from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
@@ -34,14 +35,8 @@ logfire.instrument_fastapi(app, capture_headers=True)
 async def main(
     request: Request,
     # token: Annotated[str, Depends(oauth2_scheme)]
-) -> MainResponse:
-    return MainResponse(
-        **{
-            'success': True,
-            'service': 'Intellines Landing Backend',
-            'ip': Utils.get_ip_from_request(request=request),
-        }
-    )
+) -> RedirectResponse:
+    return RedirectResponse('/docs')
 
 
 if __name__ == '__main__':
