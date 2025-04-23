@@ -1,6 +1,5 @@
-from typing import Any
 import sys
-from typing import Generator
+from typing import Any, Generator
 
 from sqlmodel import Session, SQLModel, create_engine
 

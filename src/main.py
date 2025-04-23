@@ -6,12 +6,12 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
-from config import config
-from contact_us.routers import router as contact_us_router
-from users.routers import router as user_router
-from logging_config import logger
 from all_schemas import MainResponse
 from all_utils import Utils
+from config import config
+from contact_us.routers import router as contact_us_router
+from logging_config import logger
+from users.routers import router as user_router
 
 app: FastAPI = FastAPI(title='Intellines Landing Backend')
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
@@ -32,7 +32,7 @@ logfire.instrument_fastapi(app, capture_headers=True)
 
 @app.get('/')
 async def main(
-    request: Request, 
+    request: Request,
     # token: Annotated[str, Depends(oauth2_scheme)]
 ) -> MainResponse:
     return MainResponse(
