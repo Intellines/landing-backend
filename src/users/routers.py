@@ -29,16 +29,16 @@ async def delete_user(user_id: int, session: Session = Depends(get_session)) -> 
     return await UserService.delete_user(user_id, session)
 
 
-@router.put('/updatePassword')
+@router.patch('/updatePassword')
 async def update_user_password(user_id: int, payload: UpdatePasswordRequest, session: Session = Depends(get_session)) -> User:
     raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail='Service is not available')
 
 
-@router.put('/updateUsername')
+@router.patch('/updateUsername')
 async def update_username(user_id: int, payload: UpdateUsernameRequest, session: Session = Depends(get_session)) -> User:
     raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail='Service is not available')
 
 
-@router.put('/updateEmail')
+@router.patch('/updateEmail')
 async def update_user_email(user_id: int, payload: UpdateEmailRequest, session: Session = Depends(get_session)) -> User:
     raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail='Service is not available')
