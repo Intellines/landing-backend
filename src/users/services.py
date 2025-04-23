@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 from all_models import User
 from database import get_session
 from logging_config import logger
-from users.schemas import UserCreate
+from users.schemas import UpdatePasswordRequest, UserCreate
 from users.utils import UserUtils
 
 
@@ -47,6 +47,7 @@ class UserService:
         session.refresh(db_user)
         return db_user
 
+    @staticmethod
     async def get_user(user_id: int, session: Session = Depends(get_session)) -> User:
         logger.info(f'Get User with ID - {user_id}')
         user: User | None = session.get(User, user_id)
@@ -55,6 +56,7 @@ class UserService:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with ID - {user_id} not found')
         return user
 
+    @staticmethod
     async def delete_user(user_id: int, session: Session = Depends(get_session)) -> User:
         logger.warning(f'Delete User request')
         logger.info(f'Get User with ID - {user_id}')
@@ -65,4 +67,26 @@ class UserService:
 
         session.delete(user)
         session.commit()
+        return user
+
+    @staticmethod
+    async def update_user_password(user_id: int, payload: UpdatePasswordRequest, session: Session = Depends(get_session)) -> User:
+        logger.info(f'Update password request - {payload.model_dump_json()}')
+        logger.info(f'Get User with ID - {user_id}')
+        user: User | None = session.get(User, user_id)
+        if not user:
+            logger.warning(f'User with ID - {user_id} not found')
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with ID - {user_id} not found')
+
+        # validate password hashes
+        old_password_hash: str = user.password_hash
+        if not UserUtils.validate_password(payload.old_password, old_password_hash):
+            logger.warning(f'Wrong Password')
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Wrong Password')
+
+        new_password_hash: str = UserUtils.generate_password_hash(payload.new_password)
+        user.password_hash = new_password_hash
+
+        session.commit()
+        session.refresh(user)
         return user

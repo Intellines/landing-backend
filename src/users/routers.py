@@ -31,7 +31,7 @@ async def delete_user(user_id: int, session: Session = Depends(get_session)) -> 
 
 @router.patch('/updatePassword')
 async def update_user_password(user_id: int, payload: UpdatePasswordRequest, session: Session = Depends(get_session)) -> User:
-    raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail='Service is not available')
+    return await UserService.update_user_password(user_id, payload, session)
 
 
 @router.patch('/updateUsername')
