@@ -3,8 +3,8 @@ from typing import Annotated
 import logfire
 import uvicorn
 from fastapi import Depends, FastAPI, Request
-from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordBearer
 
 from all_schemas import MainResponse
