@@ -4,7 +4,7 @@ from typing import Generator
 
 from sqlmodel import Session, SQLModel, create_engine
 
-from .config import config
+from config import config
 
 try:
     from logging_config import logger

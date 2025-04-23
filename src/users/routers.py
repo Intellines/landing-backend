@@ -1,8 +1,15 @@
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends
+from all_models import User
+from sqlmodel import Session, select
+from database import get_session
+from logging_config import logger
 
+router: APIRouter = APIRouter(prefix='/users', tags=['users'])
 
-class User(BaseModel):
-    username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
+@router.get('/')
+async def get_all_users(session: Session = Depends(get_session)) -> list[User]:
+    users: list[User] = session.exec(
+        select(User)
+    ).all()
+    logger.info(f'Found {len(users)} Users')
+    return users
