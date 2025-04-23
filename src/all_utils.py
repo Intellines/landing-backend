@@ -3,7 +3,7 @@ from fastapi import Request
 from httpx import HTTPStatusError, RequestError, Response
 
 from logging_config import logger
-from schemas import LocationIP
+from src.all_schemas import LocationIP
 
 
 class Utils:
