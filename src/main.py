@@ -38,6 +38,10 @@ async def main(
 ) -> RedirectResponse:
     return RedirectResponse('/docs')
 
+"""
+Саша - воннннючая
+"""
+
 
 if __name__ == '__main__':
     logger.info(f'starting server at {config.HOST}:{config.PORT}')
