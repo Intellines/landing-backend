@@ -19,9 +19,14 @@ async def create_user(user: UserCreate, session: Session = Depends(get_session))
     return await UserService.create_user(user, session)
 
 
-@router.get('/')
-async def get_user(user_id: int, session: Session = Depends(get_session)) -> User:
-    return await UserService.get_user(user_id, session)
+@router.get('/byID')
+async def get_user_by_id(user_id: int, session: Session = Depends(get_session)) -> User:
+    return await UserService.get_user_by_id(user_id, session)
+
+
+@router.get('/byUsername')
+async def get_user_by_username(username: str, session: Session = Depends(get_session)) -> User:
+    return await UserService.get_user_by_username(username, session)
 
 
 @router.delete('/')
