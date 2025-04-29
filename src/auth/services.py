@@ -16,7 +16,7 @@ class AuthService:
     async def authenticate_user(email: str, password: str, session: Session = Depends(get_session)) -> Token:
         logger.info(f'Authenticating User - {email}')
         user: User | None = session.exec(select(User).where(User.email == email)).one_or_none()
-        if not user or user.is_disabled:
+        if not user:
             logger.warn(f'User with email - {email} not found')
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Wrong email or password')
         logger.info(f'Found User - {user.model_dump_json()}')
@@ -30,8 +30,6 @@ class AuthService:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Wrong email or password')
 
         token: str = await AuthUtils.create_access_token({'sub': user.email})
-
-        logger.info('Successfully Authenticated')
         return Token(token=token, token_type='bearer')
 
 
