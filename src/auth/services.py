@@ -7,11 +7,13 @@ from all_models import User
 from database import get_session
 from logging_config import logger
 from users.utils import UserUtils
+from auth.schemas import Token
+from auth.utils import AuthUtils
 
 
 class AuthService:
     @staticmethod
-    async def authenticate_user(email: str, password: str, session: Session = Depends(get_session)) -> User:
+    async def authenticate_user(email: str, password: str, session: Session = Depends(get_session)) -> Token:
         logger.info(f'Authenticating User - {email}')
         user: User | None = session.exec(select(User).where(User.email == email)).one_or_none()
         if not user:
@@ -28,5 +30,7 @@ class AuthService:
             logger.warning('Wrong password')
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Wrong email or password')
 
-        logger.info('Authenticated')
-        return user
+        token: str = await AuthUtils.create_access_token({'sub': user.email})
+
+        logger.info('Successfully Authenticated')
+        return Token(token=token, token_type='bearer')

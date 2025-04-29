@@ -3,7 +3,7 @@ from typing import Any
 
 from jose import JWTError, jwt
 
-from src.config import config
+from config import config
 
 
 class AuthUtils:
