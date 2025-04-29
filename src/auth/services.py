@@ -1,4 +1,4 @@
-import asyncio
+from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from sqlmodel import Session, select
@@ -16,10 +16,9 @@ class AuthService:
     async def authenticate_user(email: str, password: str, session: Session = Depends(get_session)) -> Token:
         logger.info(f'Authenticating User - {email}')
         user: User | None = session.exec(select(User).where(User.email == email)).one_or_none()
-        if not user:
+        if not user or user.is_disabled:
             logger.warn(f'User with email - {email} not found')
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Wrong email or password')
-
         logger.info(f'Found User - {user.model_dump_json()}')
 
         if user.is_disabled is True:
@@ -34,3 +33,8 @@ class AuthService:
 
         logger.info('Successfully Authenticated')
         return Token(token=token, token_type='bearer')
+
+
+    async def decode_token(token: str) -> dict | None:
+        decoded: Any = await AuthUtils.decode_access_token(token)
+        return decoded
