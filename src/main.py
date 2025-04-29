@@ -9,6 +9,7 @@ from fastapi.security import OAuth2PasswordBearer
 
 from all_schemas import MainResponse
 from all_utils import Utils
+from auth.routers import router as auth_router
 from config import config
 from contact_us.routers import router as contact_us_router
 from logging_config import logger
@@ -27,6 +28,7 @@ app.add_middleware(
 
 app.include_router(contact_us_router)
 app.include_router(user_router)
+app.include_router(auth_router)
 
 logfire.instrument_fastapi(app, capture_headers=True)
 
@@ -37,6 +39,7 @@ async def main(
     # token: Annotated[str, Depends(oauth2_scheme)]
 ) -> RedirectResponse:
     return RedirectResponse('/docs')
+
 
 """
 Саша - воннннючая

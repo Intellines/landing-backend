@@ -59,10 +59,7 @@ class UserService:
     @staticmethod
     async def get_user_by_username(username: str, session: Session = Depends(get_session)) -> User:
         logger.info(f'Get User with username - {username}')
-        user: User | None = session.exec(
-            select(User)
-            .where(User.username == username)
-        ).one_or_none()
+        user: User | None = session.exec(select(User).where(User.username == username)).one_or_none()
         if not user:
             logger.warning(f'User with username - {username} not found')
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with username - {username} not found')

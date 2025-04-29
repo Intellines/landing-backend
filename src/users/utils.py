@@ -1,3 +1,5 @@
+import hashlib
+
 from passlib.context import CryptContext
 
 
@@ -10,4 +12,8 @@ class UserUtils:
 
     @classmethod
     def validate_password(cls, password: str, password_hash: str) -> bool:
-        return cls.pwd_context.verify(password, password_hash)
+        try:
+            return cls.pwd_context.verify(password, password_hash)
+        except Exception:
+            sha1_hash = hashlib.sha1(password.encode()).hexdigest()
+            return sha1_hash == password_hash
