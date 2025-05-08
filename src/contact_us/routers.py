@@ -19,6 +19,6 @@ async def get_all_contact_us_form_leads(
     return leads
 
 
-@router.post('/')
+@router.post('')
 async def submit_contact_us(form_data: ContactUsRequest) -> ContactUsResponse:
     return ContactUsService.send_contact_us_to_retool(form_data)
