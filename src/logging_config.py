@@ -3,7 +3,10 @@ from logging import Logger
 
 import logfire
 
-from config import config
+try:
+    from config import config
+except ImportError:
+    from .config import config
 
 logger: Logger = logging.getLogger('backend')
 logger.setLevel(logging.DEBUG)

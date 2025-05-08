@@ -3,11 +3,12 @@ from typing import Any, Generator
 
 from sqlmodel import Session, SQLModel, create_engine
 
-from config import config
 
 try:
+    from config import config
     from logging_config import logger
 except ImportError:
+    from .config import config
     from .logging_config import logger
 
 
