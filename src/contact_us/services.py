@@ -5,7 +5,7 @@ from logging_config import logger
 from config import config
 from schemas import LocationIP
 from utils import Utils
-from models import ContactUsFormLead
+from contact_us.models import ContactUsFormLead
 
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
 
@@ -42,7 +42,9 @@ class ContactUsService:
         # send contact us email to the lead
         await RetoolAPI.send_email_via_retool(
             email_payload=RetoolEmailPayload(
-                emails=[contact_us_response.email], subject='🤝 Thank you for Reaching Out!', body=contact_us_email
+                emails=[contact_us_response.email], 
+                subject='🤝 Thank you for Reaching Out!', 
+                body=contact_us_email.replace('{name}', contact_us_response.name)
             )
         )
 

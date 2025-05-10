@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, constr
 
 from contact_us.enums import FormOrigin
-from all_enums import Origin
+from enums import Origin
 
 
 class ContactUsRequest(BaseModel):

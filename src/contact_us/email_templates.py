@@ -115,7 +115,7 @@ contact_us_email = """
           <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
           <h1>Thank You for Contacting Us</h1>
-          <p>Hello {{ startTrigger.data.name }}!</p>
+          <p>Hello {name}!</p>
 
           <p>
             We've received your message and will get back to you shortly.
@@ -129,6 +129,7 @@ contact_us_email = """
 
           <div class="contact-details">
             <a href="mailto:intellines.company@gmail.com">intellines.company@gmail.com</a>
+            <br>
             <a href="tel:+380935696518">+380 93 569 6518</a>
           </div>
 
