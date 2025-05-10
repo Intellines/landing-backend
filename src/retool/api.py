@@ -10,7 +10,7 @@ class RetoolAPI:
 
     @classmethod
     async def send_email_via_retool(cls, email_payload: RetoolEmailPayload) -> None:
-        logger.info(f'Sending Email via Retool - {email_payload.model_dump_json(indent=2)}')
+        logger.debug(f'Sending Email via Retool - {email_payload.model_dump_json(indent=2)}')
         client: AsyncClient = AsyncClient()
         try:
             response: Response = await client.post(
