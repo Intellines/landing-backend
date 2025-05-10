@@ -21,7 +21,7 @@ if not DATABASE_URL:
 
 try:
     logger.debug('Connecting to the database')
-    engine = create_engine(DATABASE_URL)
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
     with engine.connect() as connection:
         connection.close()
     logger.debug('Successfully connected to the database')
