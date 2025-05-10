@@ -39,6 +39,13 @@ class ContactUsService:
             )
         )
 
+        # send contact us email to the lead
+        await RetoolAPI.send_email_via_retool(
+            email_payload=RetoolEmailPayload(
+                emails=[contact_us_response.email], subject='🤝 Thank you for Reaching Out!', body=contact_us_email
+            )
+        )
+
         # enrich ip with location
         await cls._add_location_to_payload(response=contact_us_response, form_data=form_data)
         contact_us_db: ContactUsFormLead = ContactUsFormLead(**contact_us_response.model_dump())
@@ -47,14 +54,5 @@ class ContactUsService:
         session.add(contact_us_db)
         session.commit()
         session.refresh(contact_us_db)
-
-        # send contact us email to the lead
-        asyncio.create_task(
-            RetoolAPI.send_email_via_retool(
-                email_payload=RetoolEmailPayload(
-                    emails=[contact_us_response.email], subject='🤝 Thank you for Reaching Out!', body=contact_us_email
-                )
-            )
-        )
 
         return contact_us_db
