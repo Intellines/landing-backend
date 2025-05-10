@@ -23,15 +23,3 @@ class ContactUsResponse(BaseModel):
 
     city: str | None = None
     country: str | None = None
-
-
-class ContactUsLeadCreate(BaseModel):
-    name: constr(max_length=500)
-    email: str
-    name: str
-    message: str | None
-    origin: Origin = Origin.LANDING
-    ip: str | None
-    country: str | None
-    city: str | None
-    additional_data: dict = {}

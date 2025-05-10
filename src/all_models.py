@@ -10,7 +10,7 @@ from all_enums import Origin
 class ContactUsFormLead(SQLModel, table=True):
     __tablename__ = 'contact_us_form_leads'
     id: int = Field(primary_key=True)
-    name: str = Field(max_length=500, unique=True)
+    name: str
     email: str
     name: str
     message: str | None
