@@ -14,6 +14,7 @@ from config import config
 from contact_us.routers import router as contact_us_router
 from logging_config import logger
 from users.routers import router as user_router
+from retool.routers import router as retool_router
 
 app: FastAPI = FastAPI(title='Intellines Landing Backend')
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
@@ -29,6 +30,7 @@ app.add_middleware(
 app.include_router(contact_us_router)
 app.include_router(user_router)
 app.include_router(auth_router)
+app.include_router(retool_router)
 
 logfire.instrument_fastapi(app, capture_headers=True)
 
