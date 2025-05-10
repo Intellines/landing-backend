@@ -21,6 +21,8 @@ class Config(BaseSettings):
     RETOOL_EMAIL_URL: str
     RETOOL_EMAIL_API_KEY: str
 
+    ADMIN_EMAIL: str
+
     model_config: ClassVar[SettingsConfigDict] = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
 
 

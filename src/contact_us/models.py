@@ -7,11 +7,11 @@ from sqlmodel import Field, SQLModel
 from enums import Origin
 
 
-class ContactUsFormLeads(SQLModel, table=True):
+class ContactUsFormLead(SQLModel, table=True):
     __tablename__ = 'contact_us_form_leads'
 
     id: int = Field(primary_key=True)
-    name: str = Field(max_length=500, unique=True)
+    name: str
     email: str
     name: str
     message: str | None
