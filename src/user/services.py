@@ -1,11 +1,11 @@
 from fastapi import Depends, HTTPException, status
 from sqlmodel import Session, select
 
-from all_models import User
+from user.models import User
 from database import get_session
 from logging_config import logger
-from users.schemas import UpdatePasswordRequest, UserCreate
-from users.utils import UserUtils
+from user.schemas import UpdatePasswordRequest, UserCreate
+from user.utils import UserUtils
 
 
 class UserService:

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlmodel import Session, select
 
-from all_models import ContactUsFormLeads
+from contact_us.models import ContactUsFormLeads
 from contact_us.schemas import ContactUsRequest, ContactUsResponse
 from contact_us.services import ContactUsService
 from database import get_session

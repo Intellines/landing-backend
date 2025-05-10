@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 
-from all_models import User
+from user.models import User
 from database import get_session
-from users.schemas import UpdateEmailRequest, UpdatePasswordRequest, UpdateUsernameRequest, UserCreate
-from users.services import UserService
+from user.schemas import UpdateEmailRequest, UpdatePasswordRequest, UpdateUsernameRequest, UserCreate
+from user.services import UserService
 
 router: APIRouter = APIRouter(prefix='/users', tags=['users'])
 

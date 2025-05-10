@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
 from sqlmodel import Session, select
 
-from all_models import User
+from user.models import User
 from auth.utils import AuthUtils
 from database import get_session
 from logging_config import logger

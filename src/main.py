@@ -7,13 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordBearer
 
-from all_schemas import MainResponse
-from all_utils import Utils
+from schemas import MainResponse
+from utils import Utils
 from auth.routers import router as auth_router
 from config import config
 from contact_us.routers import router as contact_us_router
 from logging_config import logger
-from users.routers import router as user_router
+from user.routers import router as user_router
 
 app: FastAPI = FastAPI(title='Intellines Landing Backend')
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
